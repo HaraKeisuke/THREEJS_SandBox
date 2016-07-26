@@ -9,8 +9,7 @@
         "preserveConstEnums": true,
         "sourceMap": true,
         "suppressImplicitAnyIndexErrors": true,
-        "outDir": "./app",
-        "jsx": "react"
+        "outDir": "./app"
     },
     "formatCodeOptions": {
         "indentSize": 2,
@@ -27,7 +26,12 @@
         "!./src/typings/**/*.ts"
     ],
     "files": [
+        "./src/Interface/Vector3.ts",
         "./src/main.ts",
+        "./src/Manager/CameraManager.ts",
+        "./src/Manager/RendererManager.ts",
+        "./src/Manager/SceneManager.ts",
+        "./typings/node/node.d.ts",
         "./typings/threejs/three.d.ts",
         "./typings/tsd.d.ts"
     ],

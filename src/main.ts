@@ -1,73 +1,51 @@
 ///<reference path="../typings/tsd.d.ts" />
 
 import * as THREE from 'three';
+import SceneManager from './Manager/SceneManager';
+import RendererManager from './Manager/RendererManager';
+import CameraManager from './Manager/CameraManager';
 
-class ThreeJSTest {
+let initialize = () => {
+  //レンダラーの初期化
+  RendererManager.getInstance().initialize(window.innerWidth, window.innerHeight);
 
-    private scene: THREE.Scene;
-    private camera: THREE.Camera;
-    private renderer: THREE.WebGLRenderer;
-    private geometry: THREE.Geometry;
-    private material: THREE.Material;
-    private cube: THREE.Mesh;
+  //シーンの作成・初期化
+  SceneManager.getInstance().initialize();
 
-    constructor() {
+  //カメラの作成・初期化
+  CameraManager.getInstance().initialize();
+  CameraManager.getInstance().setPosition({ z: 5 });
 
-        // レンダラーを作成
-        this.createRenderer();
-        // シーンを作成
-        this.createScene();
 
-    }
+  // 立方体のジオメトリーを作成
+  let geometry = new THREE.BoxGeometry(Math.random() * 5 / 10, 0.3, 0.3);
+  // 緑のマテリアルを作成
+  let material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  // 上記作成のジオメトリーとマテリアルを合わせてメッシュを生成
+  let cube = new THREE.Mesh(geometry, material);
+  // メッシュをシーンに追加
+  SceneManager.getInstance().getScene().add(cube);
 
-    private createRenderer(){
-        // WebGL レンダラーを作成
-        this.renderer = new THREE.WebGLRenderer();
-        // サイズの設定
-        this.renderer.setSize( window.innerWidth, window.innerHeight );
-        document.body.appendChild( this.renderer.domElement );
+  console.log(SceneManager.getInstance().getScene());
 
-    }
+  RendererManager.getInstance().addListener("render", () => {
+    // 立方体メッシュを自転
+    cube.rotation.x += 0.1;
+    cube.rotation.y += 0.1;
+  });
 
-    private createScene(){
 
-        // シーン (空間) を作成
-        this.scene = new THREE.Scene();
+  //レンダリング
+  RendererManager.getInstance().render();
+};
 
-        // 立方体のジオメトリーを作成
-        this.geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        // 緑のマテリアルを作成
-        this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        // 上記作成のジオメトリーとマテリアルを合わせてメッシュを生成
-        this.cube = new THREE.Mesh( this.geometry, this.material );
-        // メッシュをシーンに追加
-        this.scene.add( this.cube );
 
-        // カメラを作成
-        this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-        // カメラ位置を設定
-        this.camera.position.z = 5;
-
-    }
-
-    public render(){
-        requestAnimationFrame(this.render.bind(this));
-
-        // 立方体メッシュを自転
-        this.cube.rotation.x += 0.1;
-        this.cube.rotation.y += 0.1;
-
-        // レンダリング
-        this.renderer.render(this.scene, this.camera);
-    }
-
-}
 
 // ウィンドウがロードされた時
-window.addEventListener("load",function(){
+window.addEventListener("load", function() {
+  initialize();
+  // アプリケーションの起動
+  // var threeJSTest = new ThreeJSTest();
+  // threeJSTest.render();
 
-    // アプリケーションの起動
-    var threeJSTest = new ThreeJSTest();
-    threeJSTest.render();
-
-},false);
+}, false);

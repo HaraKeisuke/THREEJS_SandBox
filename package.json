@@ -4,9 +4,20 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
-    "three": "^0.79.0"
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-typescript": "^2.13.6",
+    "gulp-uglify": "^1.5.4",
+    "gulp-watch": "^4.3.9",
+    "three": "^0.79.0",
+    "tsify": "^1.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "gulp-webserver": "^0.9.1",
+    "tsify": "^1.0.1",
+    "vinyl-source-stream": "^1.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
