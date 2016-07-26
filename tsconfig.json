@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": false,
+        "noLib": false,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "outDir": "./app",
+        "jsx": "react"
+    },
+    "formatCodeOptions": {
+        "indentSize": 2,
+        "tabSize": 4,
+        "newLineCharacter": "\r\n",
+        "convertTabsToSpaces": true,
+        "insertSpaceAfterCommaDelimiter": true
+    },
+    "exclude": [],
+    "compileOnSave": false,
+    "filesGlob": [
+        "./**/*.{ts,tsx}",
+        "!./node_modules/**/*.ts",
+        "!./src/typings/**/*.ts"
+    ],
+    "files": [
+        "./src/main.ts",
+        "./typings/threejs/three.d.ts",
+        "./typings/tsd.d.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}
